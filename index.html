@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arpit Rastogi | Webfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5dc;
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated Flower Border */
+    body::before, body::after {
+      content: "✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿";
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 40px;
+      text-align: center;
+      font-size: 24px;
+      background: #f5f5dc;
+      z-index: 1000;
+    }
+
+    body::before {
+      top: 0;
+      animation: marquee 10s linear infinite;
+    }
+
+    body::after {
+      bottom: 0;
+      animation: marquee-reverse 10s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes marquee-reverse {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0%); }
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #f5f5dc;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      word-wrap: break-word;
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    /* Custom scrollbar styling */
+    .sidebar::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #000;
+      border-radius: 3px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb:hover {
+      background: #333;
+    }
+
+    .navigation-menu {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .nav-link {
+      color: #2d5016;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      text-align: center;
+      border: 2px solid transparent;
+    }
+
+    .nav-link:hover {
+      background: rgba(45, 80, 22, 0.1);
+      border-color: #2d5016;
+      transform: translateY(-2px);
+    }
+
+    .nav-link.active {
+      background: rgba(45, 80, 22, 0.2);
+      border-color: #2d5016;
+      font-weight: 600;
+    }
+
+    .contact-section {
+      position: sticky;
+      bottom: 0;
+      background: #f5f5dc;
+      padding: 15px 0;
+      margin-top: auto;
+      border-top: 1px solid rgba(45, 80, 22, 0.1);
+    }
+
+    .contact-section h4 {
+      color: #2d5016;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      animation: bounce 2s infinite;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    .contact-section p {
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 8px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    main {
+      margin-left: 270px;
+      flex-grow: 1;
+      position: relative;
+      z-index: 5;
+    }
+
+    .display-1 {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .display-1.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .txt-fx {
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .skill-icon img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .skill-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .skill-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #2d5016;
+      text-align: center;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 25px;
+      border: 1px solid rgba(45, 80, 22, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #2d5016;
+      margin-bottom: 15px;
+      line-height: 1.3;
+    }
+
+    .project-description {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .project-skills {
+      font-size: 12px;
+      color: #666;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .experience-section {
+      margin-top: 30px;
+    }
+
+    .company-name {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2d5016;
+      margin-bottom: 20px;
+    }
+
+    .role {
+      margin-bottom: 25px;
+      padding-left: 20px;
+      border-left: 3px solid #2d5016;
+    }
+
+    .role-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .role-duration {
+      font-size: 14px;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+
+    .role-responsibilities {
+      margin-left: 0;
+      padding-left: 20px;
+    }
+
+    .role-responsibilities li {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background: #f5f5dc;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="navigation-menu">
+      <nav class="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#Current experience" class="nav-link">Current Experience</a>
+        <a href="#Past experience" class="nav-link">Past Experiences</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#education" class="nav-link">Education</a>
+      </nav>
+    </div>
+    <div class="contact-section">
+      <h4>get in touch!</h4>
+      <p>+91 9990486814</p>
+      <p>rastogi.arpit1412@gmail.com</p>
+    </div>
+  </div>
+  <main>
+    <section id="about" class="my-3 py-3 bg-text">
+      <div class="container">
+        <h1 class="display-1 txt-fx">Hi, I'm Arpit</h1>
+        <p class="lead">PostgreSQL Database Consultant | AWS Cloud Database Engineer</p>  
+        <p>As a highly motivated and results-oriented database administrator, I have demonstrated my expertise in PostgreSQL for over 6+
+years and in AWS for over 2.5 years. My passion for staying on top of the latest technologies and implementing best practices
+has allowed me to consistently deliver outstanding results. With a strong background in managing multiple 3-tier clusters, logical
+and streaming replication, backups, and performance tuning, I have honed my skills in AWS EC2, RDS, VPC, S3, and SNS, and
+I am proficient in using GitHub and Jenkins.
+      </p>
+        <a href="https://www.linkedin.com/in/arpit-rastogi-07b37a16a/" class="btn btn-dark px-4 mt-3" target="_blank">Connect on LinkedIn</a>
+      </div>
+    </section>
+
+    <section id="Current experience" class="my-3 py-3 bg-text">
+      <div class="container">
+        <h2 class="display-1">Current Experience</h2>
+        <div class="Current experience">
+          <h3 class="company-name">Allstate India Private Limited</h3>
+          <div class="role">
+            <h4 class="role-title">PostgreSQL Database Consultant</h4>
+            <p class="role-duration">(May 2022 – Present)</p>
+          </div>
+          <div class="role">
+            <h4 class="role-title">Senior Consultant</h4>
+            <p class="role-duration">(May 2022 – Present)</p>
+            <ul class="role-responsibilities">
+              <li>Ensured high availability and performance of PostgreSQL databases for SquareTrade, handling backups, restores, disaster recovery planning, and tuning with zero downtime.</li>
+              <li>Migrated on-prem PostgreSQL clusters to AWS RDS and Aurora; configured and managed EDB EFM for disaster recovery with regular DR testing.</li>
+              <li>Enhanced data warehousing systems to support and streamline analytical processes.</li>
+              <li>Ensured timely execution of physical and logical backups, including triggering them manually during failures.</li>
+              <li>Provided query optimization, database health assessments, and best practice recommendations for performance improvements.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="Past experience" class="my-3 py-3 bg-text">
+      <div class="container">
+        <h2 class="display-1">Past Experiences</h2>
+        <div class="Past Experiences">
+          <h3 class="company-name">Flentas Technologies Private Limited</h3>
+          <div class="role">
+            <h4 class="role-title">PostgreSQL Database Consultant</h4>
+            <p class="role-duration">(Feb 2021 – May 2022)</p>
+          </div>
+          <div class="role">
+            <ul class="role-responsibilities">
+              <li>Monitored and optimized database health and query performance for clients.</li>
+              <li>Full management of PostgreSQL database engines on AWS RDS (backups, restores, disaster recovery techniques
+and plans, database performance, database health, performance tuning etc).</li>
+              <li>Led the migration of on-premises databases to the cloud using MSSQL clustering and AWS solutions for Svatantra
+Microfinance (Aditya Birla Group).</li>
+              <li>Managed PostgreSQL databases and implemented disaster recovery and cross-cloud replication for Godrej Housing
+Finance Limited.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="container">
+        <div class="Past Experiences">
+          <h3 class="company-name">Drishti Soft Solutions Private Limited </h3>
+          <div class="role">
+            <h4 class="role-title">Senior Product Engineer</h4>
+            <p class="role-duration">(Sept 2018 – Jan 2021)</p>
+          </div>
+          <div class="role">
+            <ul class="role-responsibilities">
+              <li>Deployed VideoKYC, VideoCC, and VideoPD PostgreSQL database servers and clusters for clients such as Origa
+Lease Finance Limited and Muthoot Finance Limited.</li>
+              <li>Troubleshooting and upgrading product patches, database patches and application integration with PostgreSQL
+database.</li>
+              <li>Managed VideoKYC servers and APIs and ensured compliance with government regulations.</li>
+              <li>On-site experience at Grofers India Private Limited, Ziqitsa Healthcare Private Limited, and OLX India Private Limited
+to manage database servers and database clusters for backups, maintenance and troubleshooting the issues.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="Past Experiences">
+          <h3 class="company-name">HCL</h3>
+          <div class="role">
+            <h4 class="role-title">Junior Engineer</h4>
+            <p class="role-duration">(June 2015 – Dec 2015)</p>
+          </div>
+          <div class="role">
+            <ul class="role-responsibilities">
+              <li>Contributed to projects for British Telecom.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    <section id="skills" class="my-5 py-5 bg-text">
+      <div class="container">
+        <h2 class="display-1">Skills</h2>
+        <div class="skills-container">
+          <div class="skill-icon"><img src="https://www.svgrepo.com/show/353443/aws.svg" alt="AWS"><span class="skill-name">AWS</span></div>
+          <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" alt="PostgreSQL"><span class="skill-name">PostgreSQL</span></div>
+          <div class="skill-icon"><img src="https://www.svgrepo.com/show/349375/github.svg" alt="GitHub"><span class="skill-name">GitHub</span></div>
+          <div class="skill-icon"><img src="https://www.svgrepo.com/show/373699/jenkins.svg" alt="Jenkins"><span class="skill-name">Jenkins</span></div>
+          <div class="skill-icon"><img src="https://www.svgrepo.com/show/373848/mysql.svg" alt="MySQL"><span class="skill-name">MySQL</span></div>
+          <div class="skill-icon"><img src="https://www.svgrepo.com/show/354202/postman-icon.svg" alt="Postman"><span class="skill-name">Postman</span></div>
+          <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Zabbix_logo.svg" alt="Zabbix"><span class="skill-name">Zabbix</span></div>
+          <div class="skill-icon"><img src="https://www.svgrepo.com/show/448219/datadog.svg" alt="Datadog"><span class="skill-name">Datadog</span></div>
+          <div class="skill-icon"><img src="https://www.svgrepo.com/show/353935/jira.svg" alt="JIRA"><span class="skill-name">JIRA</span></div>
+          <div class="skill-icon"><img src="https://www.svgrepo.com/show/473725/microsoftsqlserver.svg" alt="MSSQL"><span class="skill-name">MSSQL</span></div>
+          <div class="skill-icon"><img src="https://www.svgrepo.com/show/373429/ansible.svg" alt="Ansible"><span class="skill-name">Ansible</span></div>
+          <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg" alt="Excel"><span class="skill-name">Excel</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="my-5 py-5 bg-text">
+      <div class="container">
+        <h2 class="display-1">Projects</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <h3 class="project-title">Postgres Snapshot Sync for Cloud Migration</h3>
+            <p class="project-description">Warehouse (OLAP) database migration using Logical Replication with export snapshot technique and advancing the replication after successful restore.</p>
+          </div>
+          
+          <div class="project-card">
+            <h3 class="project-title">MSSQL AlwaysOn Cloud Migration</h3>
+            <p class="project-description">Migrate a 3-node SQL Server Always On Availability Group (AG) from an on-premises environment to AWS Cloud, ensuring high availability and minimal downtime. The migration involves extending the existing AG to include AWS nodes, syncing data, performing a controlled failover to the cloud nodes, and decommissioning the on-prem setup post-validation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="my-5 py-5 bg-text">
+      <div class="container">
+        <h2 class="display-1">Education</h2>
+        <p><strong>Shri Ramswroop Memorial College Of Engineering And Management</strong> 
+        <p>B.Tech, Computer Science & Engineering (2011–2015).</p>
+        <p>Relevant Coursework : Machine Learning, Mathematics for Machine Learning, Artificial Neural Networks, Linear Algebra, Digital Image Processing</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Arpit Rastogi | 2025</p>
+    </footer>
+  </main>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all section titles
+    document.querySelectorAll('.display-1').forEach(title => {
+      observer.observe(title);
+    });
+
+    // Active navigation link tracking
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section');
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '-20% 0px -60% 0px'
+    });
+
+    sections.forEach(section => {
+      navObserver.observe(section);
+    });
+  </script>
+</body>
+</html>
