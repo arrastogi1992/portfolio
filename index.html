@@ -93,17 +93,21 @@
 
     main { margin-left: 270px; flex-grow: 1; padding: 40px; position: relative; z-index: 5; }
 
-    section { padding: 36px 0; min-height: auto; }
+    section { padding: 27px 0; min-height: auto; }
 
     .display-1 {
       opacity: 1;
-      transform: translateY(0);
       font-weight: 500;
       color: #4a9edd;
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      font-size: 2.475rem;
     }
-    .display-1.animate-hidden { opacity: 0; transform: translateY(30px); }
-    .display-1.fade-in { opacity: 1; transform: translateY(0); }
+    .display-1.fade-in {
+      animation: headingFadeIn 0.8s ease-out both;
+    }
+    @keyframes headingFadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
     p, li { color: #c9d6e3; }
     .lead { color: #a8c8e0; }
@@ -161,7 +165,7 @@
       </nav>
     </div>
     <div class="contact-section">
-      <h4>get in touch!</h4>
+      <h4>Get in touch!</h4>
       <p>+91 9990486814</p>
       <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="483a293b3c272f2166293a38213c797c797a082f25292124662b2725">[email&#160;protected]</a></p>
     </div>
@@ -266,6 +270,7 @@
           <div class="skill-icon"><img src="https://www.svgrepo.com/show/448253/terraform.svg" alt="Terraform"><span class="skill-name">Terraform</span></div>
           <div class="skill-icon"><img src="https://www.svgrepo.com/show/373429/ansible.svg" alt="Ansible"><span class="skill-name">Ansible</span></div>
           <div class="skill-icon"><img src="https://www.svgrepo.com/show/473725/microsoftsqlserver.svg" alt="MSSQL"><span class="skill-name">MSSQL</span></div>
+          <div class="skill-icon"><img src="https://www.svgrepo.com/show/373589/excel.svg" alt="Excel"><span class="skill-name">Excel</span></div>
         </div>
       </div>
     </section>
@@ -286,6 +291,10 @@
             <h3 class="project-title">Database (Aurora) Major Version Upgrades</h3>
             <p class="project-description">Upgraded multiple PostgreSQL databases hosted on Aurora using the Blue/Green Deployment with zero downtime.</p>
           </div>
+          <div class="project-card">
+            <h3 class="project-title">Global Database (Aurora) Cluster Setup</h3>
+            <p class="project-description">Moved all the Aurora primary cluster with 3 instances to the global clusters for failover and the DR availability.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -305,30 +314,24 @@
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const titles = document.querySelectorAll('.display-1');
 
-  // Only animate if IntersectionObserver is supported
-  if ('IntersectionObserver' in window) {
-    titles.forEach(el => el.classList.add('animate-hidden'));
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
 
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove('animate-hidden');
-          entry.target.classList.add('fade-in');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -10px 0px' });
+  titles.forEach(el => revealObserver.observe(el));
 
-    titles.forEach(el => revealObserver.observe(el));
-
-    // Hard fallback after 800ms — show everything regardless
-    setTimeout(() => {
-      titles.forEach(el => {
-        el.classList.remove('animate-hidden');
-        el.classList.add('fade-in');
-      });
-    }, 800);
-  }
+  // Trigger immediately for any headings already in view on load
+  titles.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
+      el.classList.add('fade-in');
+    }
+  });
 
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('section');
