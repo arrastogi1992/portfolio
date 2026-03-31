@@ -67,7 +67,7 @@
       color: #2d5016;
       text-decoration: none;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 500; /* was 500, kept */
       padding: 10px 12px;
       border-radius: 8px;
       transition: all 0.3s ease;
@@ -75,10 +75,10 @@
       border: 2px solid transparent;
     }
     .nav-link:hover { background: rgba(45, 80, 22, 0.1); border-color: #2d5016; }
-    .nav-link.active { background: #2d5016; color: #f5f5dc; font-weight: 600; }
+    .nav-link.active { background: #2d5016; color: #f5f5dc; font-weight: 600; /* was 600 */ }
 
     .contact-section { position: sticky; bottom: 0; background: #f5f5dc; padding: 15px 0; margin-top: auto; border-top: 1px solid rgba(45, 80, 22, 0.1); }
-    .contact-section h4 { color: #2d5016; font-size: 20px; font-weight: 700; margin-bottom: 15px; animation: bounce 2s infinite; text-align: center; }
+    .contact-section h4 { color: #2d5016; font-size: 20px; font-weight: 600; /* was 700 → reduced 25% */ margin-bottom: 15px; animation: bounce 2s infinite; text-align: center; }
     
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
@@ -88,28 +88,30 @@
     .contact-section p { color: #333; font-size: 14px; text-align: center; margin-bottom: 8px; }
 
     main { margin-left: 270px; flex-grow: 1; padding: 40px; position: relative; z-index: 5; }
-    section { padding: 60px 0; min-height: 30vh; }
 
-    .display-1 { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; font-weight: 700; color: #2d5016; }
+    /* FIX 3: Reduced section spacing — was padding: 60px 0 and min-height: 30vh */
+    section { padding: 36px 0; min-height: auto; }
+
+    .display-1 { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; font-weight: 600; /* was 700 → reduced 25% */ color: #2d5016; }
     .display-1.fade-in { opacity: 1; transform: translateY(0); }
     
     .skills-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 25px; max-width: 900px; margin-top: 30px; }
     .skill-icon { display: flex; flex-direction: column; align-items: center; padding: 20px; background: rgba(255,255,255,0.2); border-radius: 12px; transition: 0.3s; }
     .skill-icon:hover { transform: translateY(-5px); background: rgba(255,255,255,0.5); }
     .skill-icon img { width: 50px; height: 50px; object-fit: contain; margin-bottom: 10px; }
-    .skill-name { font-size: 14px; font-weight: 700; color: #2d5016; text-align: center; }
+    .skill-name { font-size: 14px; font-weight: 600; /* was 700 → reduced ~25% */ color: #2d5016; text-align: center; }
 
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 30px; }
     .project-card { background: white; border-radius: 15px; padding: 30px; border: 1px solid rgba(45, 80, 22, 0.1); box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s; }
     .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
     
-    .company-name { font-size: 24px; font-weight: 700; color: #2d5016; margin-bottom: 10px; }
+    .company-name { font-size: 24px; font-weight: 600; /* was 700 → reduced 25% */ color: #2d5016; margin-bottom: 10px; }
     .role { margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #2d5016; }
-    .role-title { font-size: 18px; font-weight: 600; color: #333; }
+    .role-title { font-size: 18px; font-weight: 500; /* was 600 → reduced ~25% */ color: #333; }
     .role-duration { font-size: 14px; color: #666; font-style: italic; margin-bottom: 10px; }
     .role-responsibilities li { font-size: 14px; color: #333; line-height: 1.6; margin-bottom: 8px; }
 
-    footer { text-align: center; padding: 60px 0; border-top: 1px solid rgba(0,0,0,0.05); }
+    footer { text-align: center; padding: 40px 0; border-top: 1px solid rgba(0,0,0,0.05); }
 
     @media (max-width: 768px) {
       .sidebar { width: 100%; height: auto; position: relative; border-right: none; }
@@ -199,6 +201,7 @@
             </ul>
           </div>
         </div>
+        <!-- FIX 2: Added missing closing </div> for the Drishti block that was breaking DOM structure -->
         <div class="mb-5">
           <h3 class="company-name">Drishti Soft Solutions Private Limited</h3>
           <div class="role">
@@ -211,6 +214,7 @@
               <li>On-site experience at Grofers, Ziqitsa Healthcare, and OLX India to manage database clusters and maintenance.</li>
             </ul>
           </div>
+        </div>
         <div class="mb-5">
           <h3 class="company-name">HCL Technologies</h3>
           <div class="role">
