@@ -268,45 +268,54 @@
       <p>Arpit Rastogi | 2026</p>
     </footer>
   </main>
+<script>
+  // Reveal animation for titles
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in');
+      }
+    });
+  }, { threshold: 0.1 });
 
-  <script>
-    // Reveal animation
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
-        }
-      });
-    }, { threshold: 0.1 });
+  document.querySelectorAll('.display-1').forEach(title => revealObserver.observe(title));
 
-    document.querySelectorAll('.display-1').forEach(title => revealObserver.observe(title));
+  // Improved Navigation Highlighter
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section');
 
-    // Improved Navigation Highlighter
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('section');
-
-    const scrollHandler = () => {
-      let currentSectionId = "";
+  const scrollHandler = () => {
+    let currentSectionId = "";
+    
+    // 1. Check if we are at the bottom of the page
+    const scrollPosition = window.innerHeight + window.pageYOffset;
+    const pageHeight = document.documentElement.scrollHeight;
+    
+    // If we're within 50px of the bottom, force "Education" (the last link)
+    if (scrollPosition >= pageHeight - 50) {
+      currentSectionId = "education";
+    } else {
+      // 2. Otherwise, detect based on scroll position
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        // Trigger if the scroll position is within the section (with a 100px offset for better UX)
-        if (pageYOffset >= (sectionTop - 150)) {
+        if (window.pageYOffset >= (sectionTop - 150)) {
           currentSectionId = section.getAttribute('id');
         }
       });
+    }
 
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSectionId}`) {
-          link.classList.add('active');
-        }
-      });
-    };
+    // Apply the active class
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${currentSectionId}`) {
+        link.classList.add('active');
+      }
+    });
+  };
 
-    window.addEventListener('scroll', scrollHandler);
-    // Trigger once on load
-    scrollHandler();
-  </script>
+  window.addEventListener('scroll', scrollHandler);
+  // Trigger once on load to set initial state
+  scrollHandler();
+</script>
 </body>
 </html>
