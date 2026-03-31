@@ -1,112 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Arpit Rastogi | Webfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arpit Rastogi | Database Engineer</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {font-family:'Poppins',sans-serif;background:#f5f5dc;display:flex;min-height:100vh;margin:0;overflow-x:hidden;}
-.sidebar {width:250px;background:#f5f5dc;padding:20px;position:fixed;height:100vh;}
-.nav-links{display:flex;flex-direction:column;gap:10px;margin-top:20px}
-.nav-link{color:#2d5016;text-decoration:none;font-weight:500;padding:8px;border-radius:8px}
-.nav-link:hover{background:rgba(45,80,22,0.1)}
-main{margin-left:270px}
-.display-1{font-weight:700;color:#2d5016}
-.company-name{font-size:24px;font-weight:700;color:#2d5016;margin-bottom:20px}
-.role{margin-bottom:25px;padding-left:20px;border-left:3px solid #2d5016}
-.role-title{font-size:18px;font-weight:600}
-.role-duration{font-size:14px;color:#666;font-style:italic;margin-bottom:15px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins, sans-serif}
+body{background:#0f172a;color:#fff;line-height:1.6}
+a{text-decoration:none;color:#38bdf8}
+
+.container{max-width:1100px;margin:auto;padding:20px}
+
+/* NAVBAR */
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px}
+nav h2{color:#38bdf8}
+nav ul{display:flex;gap:20px;list-style:none}
+
+/* HERO */
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:100px 20px}
+.hero h1{font-size:48px}
+.hero span{color:#38bdf8}
+.hero p{max-width:600px;margin:20px 0;color:#cbd5e1}
+.btn{background:#38bdf8;padding:12px 25px;border-radius:6px;color:#000;font-weight:600}
+
+/* SECTION */
+section{padding:70px 0}
+.section-title{text-align:center;font-size:32px;margin-bottom:40px;color:#38bdf8}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:#1e293b;padding:25px;border-radius:10px}
+
+/* FOOTER */
+footer{text-align:center;padding:30px;color:#94a3b8}
+
+/* ANIMATION */
+.fade{opacity:0;transform:translateY(20px);transition:0.8s}
+.show{opacity:1;transform:translateY(0)}
 </style>
 </head>
 
 <body>
 
-<div class="sidebar">
-<nav class="nav-links">
-<a href="#about" class="nav-link">About</a>
-<a href="#Current experience" class="nav-link">Current Experience</a>
-<a href="#Past experience" class="nav-link">Past Experiences</a>
+<!-- NAVBAR -->
+<nav class="container">
+<h2>Arpit</h2>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#experience">Experience</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
 </nav>
-</div>
 
-<main>
-
-<section id="about" class="container my-5">
-<h1 class="display-1">Hi, I'm Arpit</h1>
-<p class="lead">PostgreSQL Database Consultant | AWS Cloud Database Engineer</p>
+<!-- HERO -->
+<section class="hero">
+<h1>Hi, I'm <span>Arpit Rastogi</span></h1>
+<p>PostgreSQL & Cloud Database Engineer helping companies build highly available, scalable and optimized database systems.</p>
+<a href="#contact" class="btn">Hire Me</a>
 </section>
 
-<!-- CURRENT EXPERIENCE -->
-<section id="Current experience" class="container my-5">
-<h2 class="display-1">Current Experience</h2>
+<!-- ABOUT -->
+<section id="about" class="container fade">
+<h2 class="section-title">About Me</h2>
+<p>
+Passionate Software Engineer with strong expertise in PostgreSQL, AWS RDS/Aurora,
+High Availability, Disaster Recovery, Performance Tuning and Database Automation.
+Currently ensuring zero-downtime database systems for enterprise clients.
+</p>
+</section>
 
-<h3 class="company-name">Motive</h3>
-<div class="role">
-<h4 class="role-title">Senior Database Engineer (L5)</h4>
-<p class="role-duration">(Present)</p>
+<!-- EXPERIENCE -->
+<section id="experience" class="container fade">
+<h2 class="section-title">Experience</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>PostgreSQL Database Engineer</h3>
+<p><b>Client: Squaretrade Protection Plans</b></p>
 <ul>
-<li>Own availability and performance of large PostgreSQL & Aurora clusters.</li>
-<li>Design HA/DR and multi-region disaster recovery architecture.</li>
-<li>Lead database optimization to reduce cost and improve performance.</li>
-<li>Drive reliability engineering, monitoring and incident response.</li>
-<li>Partner with engineering teams for scalable data models.</li>
-<li>Automate database operations using IaC & CI/CD.</li>
-<li>Mentor engineers and define best practices.</li>
+<li>Maintaining 99.99% database uptime</li>
+<li>Managing DR with EDB EFM</li>
+<li>Query tuning & performance optimization</li>
+<li>On-call rotation (PagerDuty, Zabbix)</li>
 </ul>
+</div>
+
+<div class="card">
+<h3>Deputy Manager – Digital Marketing</h3>
+<p><b>Sintel Telecom</b></p>
+<ul>
+<li>6+ years experience in digital marketing</li>
+<li>Transitioned into technical domain</li>
+<li>Built data-driven marketing strategies</li>
+</ul>
+</div>
+
 </div>
 </section>
 
-<!-- PAST EXPERIENCE -->
-<section id="Past experience" class="container my-5">
-<h2 class="display-1">Past Experiences</h2>
+<!-- PROJECTS -->
+<section id="projects" class="container fade">
+<h2 class="section-title">Projects</h2>
 
-<h3 class="company-name">Allstate India Private Limited</h3>
-<div class="role">
-<h4 class="role-title">PostgreSQL Database Consultant / Senior Consultant</h4>
-<p class="role-duration">(May 2022 – Present)</p>
-<ul>
-<li>Ensured high availability of PostgreSQL databases for SquareTrade.</li>
-<li>Migrated on-prem clusters to AWS RDS & Aurora.</li>
-<li>Configured EDB EFM and executed DR testing.</li>
-<li>Enhanced data warehousing for analytics.</li>
-<li>Performed backups, restores & performance tuning.</li>
-</ul>
+<div class="cards">
+
+<div class="card">
+<h3>PostgreSQL Health Dashboard</h3>
+<p>Monitoring slow queries, locks & replication lag.</p>
 </div>
 
-<h3 class="company-name">Flentas Technologies Private Limited</h3>
-<div class="role">
-<h4 class="role-title">PostgreSQL Database Consultant</h4>
-<p class="role-duration">(Feb 2021 – May 2022)</p>
-<ul>
-<li>Managed PostgreSQL on AWS RDS and optimized performance.</li>
-<li>Migrated on-prem databases to cloud.</li>
-<li>Implemented DR and cross-cloud replication.</li>
-</ul>
+<div class="card">
+<h3>AWS Global Cluster Setup</h3>
+<p>Designed multi-region disaster recovery architecture.</p>
 </div>
 
-<h3 class="company-name">Drishti Soft Solutions</h3>
-<div class="role">
-<h4 class="role-title">Senior Product Engineer</h4>
-<p class="role-duration">(Sept 2018 – Jan 2021)</p>
-<ul>
-<li>Deployed PostgreSQL clusters for fintech clients.</li>
-<li>Managed VideoKYC servers and APIs.</li>
-<li>Performed troubleshooting and upgrades.</li>
-</ul>
+<div class="card">
+<h3>Query Performance Toolkit</h3>
+<p>Automation scripts to detect & fix heavy queries.</p>
 </div>
 
-<h3 class="company-name">HCL</h3>
-<div class="role">
-<h4 class="role-title">Junior Engineer</h4>
-<p class="role-duration">(June 2015 – Dec 2015)</p>
 </div>
-
 </section>
 
-</main>
+<!-- SKILLS -->
+<section class="container fade">
+<h2 class="section-title">Skills</h2>
+<div class="cards">
+<div class="card">PostgreSQL / Aurora</div>
+<div class="card">AWS RDS / EC2</div>
+<div class="card">Performance Tuning</div>
+<div class="card">High Availability & DR</div>
+<div class="card">Python / Bash</div>
+<div class="card">Linux</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="container fade">
+<h2 class="section-title">Contact</h2>
+<p>Email: yourmail@gmail.com</p>
+<p>LinkedIn: linkedin.com/in/yourprofile</p>
+</section>
+
+<footer>
+© 2026 Arpit Rastogi | Portfolio
+</footer>
+
+<script>
+// scroll animation
+const faders = document.querySelectorAll(".fade");
+window.addEventListener("scroll",()=>{
+  faders.forEach(el=>{
+    const top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      el.classList.add("show");
+    }
+  })
+})
+</script>
+
 </body>
 </html>
