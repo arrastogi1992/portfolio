@@ -269,7 +269,7 @@
     </footer>
   </main>
 <script>
-  // Reveal animation for titles
+  // 1. Reveal animation for titles (Fade-in effect)
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -280,31 +280,36 @@
 
   document.querySelectorAll('.display-1').forEach(title => revealObserver.observe(title));
 
-  // Improved Navigation Highlighter
+  // 2. High-Precision Navigation Highlighter
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('section');
 
   const scrollHandler = () => {
     let currentSectionId = "";
     
-    // 1. Check if we are at the bottom of the page
-    const scrollPosition = window.innerHeight + window.pageYOffset;
-    const pageHeight = document.documentElement.scrollHeight;
-    
-    // If we're within 50px of the bottom, force "Education" (the last link)
-    if (scrollPosition >= pageHeight - 50) {
+    // Check if we are at the very bottom of the page first (For Education)
+    const isAtBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 50;
+
+    if (isAtBottom) {
       currentSectionId = "education";
     } else {
-      // 2. Otherwise, detect based on scroll position
+      // Find which section is currently occupying the top of the viewport
+      let minDistance = Infinity;
+      
       sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (window.pageYOffset >= (sectionTop - 150)) {
+        const rect = section.getBoundingClientRect();
+        // We calculate how far the top of the section is from the top of the screen
+        // We use Math.abs because we want the one closest to 0 (the top)
+        const distance = Math.abs(rect.top - 100); 
+
+        if (distance < minDistance) {
+          minDistance = distance;
           currentSectionId = section.getAttribute('id');
         }
       });
     }
 
-    // Apply the active class
+    // Apply the active class to the sidebar
     navLinks.forEach(link => {
       link.classList.remove('active');
       if (link.getAttribute('href') === `#${currentSectionId}`) {
@@ -313,8 +318,11 @@
     });
   };
 
+  // Listen for scroll and resize
   window.addEventListener('scroll', scrollHandler);
-  // Trigger once on load to set initial state
+  window.addEventListener('resize', scrollHandler);
+  
+  // Trigger immediately on load
   scrollHandler();
 </script>
 </body>
