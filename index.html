@@ -97,11 +97,12 @@
 
     .display-1 {
       opacity: 1;
-      transform: translateY(50px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      transform: translateY(0);
       font-weight: 500;
       color: #4a9edd;
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
+    .display-1.animate-hidden { opacity: 0; transform: translateY(30px); }
     .display-1.fade-in { opacity: 1; transform: translateY(0); }
 
     p, li { color: #c9d6e3; }
@@ -265,8 +266,6 @@
           <div class="skill-icon"><img src="https://www.svgrepo.com/show/448253/terraform.svg" alt="Terraform"><span class="skill-name">Terraform</span></div>
           <div class="skill-icon"><img src="https://www.svgrepo.com/show/373429/ansible.svg" alt="Ansible"><span class="skill-name">Ansible</span></div>
           <div class="skill-icon"><img src="https://www.svgrepo.com/show/473725/microsoftsqlserver.svg" alt="MSSQL"><span class="skill-name">MSSQL</span></div>
-          <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Microsoft_Office_Excel_%282019%E2%80%932025%29.svg" alt="Excel"><span class="skill-name">Excel</span></div>
-
         </div>
       </div>
     </section>
@@ -287,10 +286,6 @@
             <h3 class="project-title">Database (Aurora) Major Version Upgrades</h3>
             <p class="project-description">Upgraded multiple PostgreSQL databases hosted on Aurora using the Blue/Green Deployment with zero downtime.</p>
           </div>
-          <div class="project-card">
-            <h3 class="project-title">Global Database (Aurora) Cluster Setup</h3>
-            <p class="project-description">Moved all the Aurora primary cluster with 3 instances to the global clusters for failover and the DR availability.</p>
-          </div>
         </div>
       </div>
     </section>
@@ -308,15 +303,32 @@
     </footer>
   </main>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in');
-      }
-    });
-  }, { threshold: 0.1 });
+  const titles = document.querySelectorAll('.display-1');
 
-  document.querySelectorAll('.display-1').forEach(title => revealObserver.observe(title));
+  // Only animate if IntersectionObserver is supported
+  if ('IntersectionObserver' in window) {
+    titles.forEach(el => el.classList.add('animate-hidden'));
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('animate-hidden');
+          entry.target.classList.add('fade-in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -10px 0px' });
+
+    titles.forEach(el => revealObserver.observe(el));
+
+    // Hard fallback after 800ms — show everything regardless
+    setTimeout(() => {
+      titles.forEach(el => {
+        el.classList.remove('animate-hidden');
+        el.classList.add('fade-in');
+      });
+    }, 800);
+  }
 
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('section');
